@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>德瑞義 20 天自助旅行手帳</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#23406B;--red:#D9482F;--yellow:#F2B441;--pink:#E58FA6;--green:#2F7D6B;--sky:#7FB9D6;--bg:#EEF4F3;--ink:#1d2b3f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;padding:12px;max-width:560px;margin:auto}
+h1{font-size:24px;margin:8px 0 2px;color:var(--navy)}h2{font-size:20px;margin:6px 0;color:var(--navy)}h3{font-size:17px;margin:10px 0 4px;color:var(--green)}
+.card{background:#fff;border:1.5px solid var(--navy);border-radius:16px;padding:14px;margin:12px 0}
+.demo{font-size:14px;background:var(--yellow);color:var(--navy);border-radius:8px;padding:1px 8px;white-space:nowrap}
+.sub{font-size:14px;color:#51607a;margin:0}
+#nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+#nav button,.back,.btn{font:inherit;cursor:pointer;border:1.5px solid var(--navy);border-radius:16px;background:#fff;color:var(--navy)}
+#nav button{min-height:64px;font-size:18px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3}
+#nav button span{font-size:22px}
+#nav button.on{background:var(--navy);color:#fff}
+.back{width:100%;min-height:56px;font-size:18px;font-weight:700;margin:16px 0 8px;background:var(--sky)}
+.btn{padding:8px 14px;min-height:44px;font-weight:700}
+.btn.map{background:var(--green);color:#fff;border-color:var(--green);display:inline-block;text-decoration:none;line-height:28px}
+section{display:none}section.on{display:block}
+.count{text-align:center;background:var(--navy);color:#fff;border-radius:16px;padding:12px;margin:10px 0}
+.count b{font-size:28px;color:var(--yellow)}
+.bp{padding:0;overflow:hidden}.bp .hd{background:var(--navy);color:#fff;padding:8px 14px;display:flex;justify-content:space-between;font-weight:700}
+.bp .bd{padding:12px 14px}.rt{display:flex;justify-content:space-between;align-items:center;text-align:center}
+.rt big{font-size:32px;font-weight:700;color:var(--navy);display:block;line-height:1.1}
+.rt .mid{flex:1;color:var(--red);font-size:14px;border-bottom:2px dashed var(--sky);margin:0 8px 14px;padding-bottom:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;border-top:2px dashed var(--sky);margin-top:10px;padding-top:8px;font-size:15px}
+.grid i{font-style:normal;color:#51607a;font-size:14px;display:block}
+.bar{height:16px;background:var(--bg);border:1.5px solid var(--navy);border-radius:8px;overflow:hidden}.bar div{height:100%;background:var(--green);width:0;transition:width .3s}
+.it{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #dfe8ea}
+.it input[type=checkbox]{width:26px;height:26px;accent-color:var(--green);flex:none}
+.it label{flex:1}.it.d label{text-decoration:line-through;color:#8a97ab}
+.it button{border:0;background:none;font-size:22px;color:var(--red);cursor:pointer;min-width:40px;min-height:40px}
+.add{display:flex;gap:8px;margin-top:10px}.add input,.f input{flex:1;font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;min-width:0}
+.f{display:grid;grid-template-columns:5.5em 1fr;gap:6px;align-items:center;margin:4px 0}.f span{font-size:15px;color:#51607a}
+.tag{display:inline-block;background:var(--sky);border-radius:8px;padding:0 8px;font-size:14px;margin-right:6px}
+.ph{background:#fff;border:1.5px dashed var(--navy);border-radius:16px;padding:20px;text-align:center;color:#51607a}
+svg{width:100%;height:auto;display:block;border:1.5px solid var(--navy);border-radius:16px;background:#DCEBF1}
+.ferry{animation:bob 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.train{animation:run 14s linear infinite}.gon{animation:gon 12s ease-in-out infinite alternate}
+.steam path{animation:st 3s ease-in-out infinite;opacity:0}.steam path:nth-child(2){animation-delay:1s}.steam path:nth-child(3){animation-delay:2s}
+.rip{animation:rp 5s ease-in-out infinite alternate}
+@keyframes bob{50%{transform:translateY(-2px) rotate(-1.5deg)}}
+@keyframes run{from{transform:translateX(-60px)}to{transform:translateX(380px)}}
+@keyframes gon{to{transform:translate(120px,40px)}}
+@keyframes st{0%{opacity:0;transform:translateY(0)}40%{opacity:.8}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes rp{to{transform:translateX(10px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+#strip{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity}
+#strip button{flex:none;min-width:72px;min-height:76px;font:inherit;font-size:14px;line-height:1.25;border:1.5px solid var(--navy);border-radius:14px;background:#fff;color:var(--navy);scroll-snap-align:start;cursor:pointer}
+#strip button b{display:block;font-size:18px}#strip small{display:block;color:var(--red);font-size:13px}
+#strip .wk{background:#FBE3E9}#strip .hol{background:#FCD9D1}#strip .on{background:var(--navy);color:#fff}#strip .on small{color:var(--yellow)}
+.sum{position:sticky;top:0;z-index:5;margin-top:0;cursor:pointer;padding:8px 12px}.sum .sd{display:none;margin-top:6px;font-size:15px}.sum.open .sd{display:block}
+.cd{border:1.5px solid var(--navy);border-radius:16px;padding:10px 12px;background:#EDEFF2;animation:pop .5s cubic-bezier(.34,1.56,.64,1) both}
+.cd.ks{background:#D8EAF4}.cd.kf{background:#FBE7B8}.cd.kp{background:#F8D9E1}
+.cd .ct{display:flex;gap:10px;align-items:center}.cd input[type=checkbox]{width:26px;height:26px;accent-color:var(--green);flex:none}
+.cd.dn .ct label{text-decoration:line-through;color:#6c788c}.cd .cn{font-size:15px;margin:4px 0 6px 36px;color:#33425a}
+.must{background:var(--red);color:#fff;border-radius:8px;padding:0 8px;font-size:14px}
+.tr{margin:6px 0 6px 18px;padding:2px 10px;border-left:3px dashed var(--navy);font-size:15px;color:#33425a}
+.tg{display:flex;gap:8px;margin:8px 0}.tg button{flex:1;min-height:48px;font:inherit;font-weight:700;border:1.5px solid var(--navy);border-radius:14px;background:#fff;color:var(--navy);cursor:pointer}.tg .on{background:var(--navy);color:#fff}
+.exr{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #dfe8ea}.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rg input,.add select{font:inherit;border:1.5px solid var(--navy);border-radius:10px;padding:8px;min-width:0;width:100%}.add select{width:auto}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+
+#mt{border-collapse:collapse;font-size:14px;width:100%;min-width:480px}#mt td,#mt th{border-bottom:1px solid #dfe8ea;padding:4px 6px;text-align:left}#mt th{color:var(--navy)}
+details{background:#fff;border:1.5px solid var(--navy);border-radius:16px;padding:10px 14px;margin:10px 0}summary{font-weight:700;color:var(--navy);min-height:44px;display:flex;align-items:center;cursor:pointer}
+.rt2{overflow-x:auto;margin:8px 0}.ln{margin:2px 0;font-size:15px}.ac{border:1.5px solid var(--navy);border-radius:12px;padding:8px 10px;margin:8px 0;background:#D8EAF4}.ac small{color:#33425a;font-size:14px;display:block}
+</style>
+</head>
+<body>
+<header>
+<svg viewBox="0 0 360 210" role="img" aria-label="瑞士山湖與列車插畫">
+<polygon points="40,128 118,44 140,60 168,36 245,128" fill="#fff" stroke="#23406B" stroke-width="2"/>
+<polygon points="118,44 130,70 140,60 150,78 168,36 160,40 140,60" fill="#DCEBF1"/>
+<polygon points="215,128 272,28 284,46 292,40 350,128" fill="#23406B"/>
+<polygon points="272,28 262,52 272,46 280,56 284,46" fill="#fff"/>
+<path d="M0 128 Q90 108 180 126 T360 120 V150 H0Z" fill="#2F7D6B"/>
+<line x1="0" y1="132" x2="360" y2="132" stroke="#23406B" stroke-width="2"/>
+<g class="train"><rect x="0" y="120" width="22" height="11" rx="3" fill="#D9482F"/><rect x="24" y="120" width="22" height="11" rx="3" fill="#D9482F"/><rect x="4" y="123" width="6" height="4" fill="#fff"/><rect x="28" y="123" width="6" height="4" fill="#fff"/></g>
+<line x1="20" y1="22" x2="190" y2="86" stroke="#23406B" stroke-width="1.5"/>
+<g class="gon"><rect x="20" y="24" width="14" height="10" rx="2" fill="#F2B441" stroke="#23406B"/></g>
+<rect x="0" y="150" width="360" height="60" fill="#7FB9D6"/>
+<rect x="0" y="150" width="104" height="60" fill="#5aa3c4"/>
+<rect x="36" y="140" width="10" height="12" fill="#fff" stroke="#23406B"/><polygon points="34,140 41,130 48,140" fill="#D9482F"/><circle cx="62" cy="138" r="5" fill="#D9482F"/><rect x="60" y="138" width="4" height="12" fill="#fff"/>
+<g class="ferry"><path d="M170 172 h60 l-8 12 h-44z" fill="#fff" stroke="#23406B" stroke-width="1.5"/><rect x="184" y="160" width="30" height="12" fill="#F2B441" stroke="#23406B"/><rect x="196" y="152" width="6" height="8" fill="#D9482F"/></g>
+<g class="rip" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"><path d="M130 192 q8-5 16 0 t16 0"/><path d="M240 196 q8-5 16 0 t16 0"/><path d="M20 190 q8-5 16 0 t16 0"/></g>
+<g><path d="M290 190 h40 l-5 14 h-30z" fill="#F2B441" stroke="#23406B" stroke-width="1.5"/><g class="steam" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M298 186 q-4-6 0-12"/><path d="M310 186 q-4-6 0-12"/><path d="M322 186 q-4-6 0-12"/></g></g>
+<text x="12" y="146" font-size="12" fill="#fff" font-weight="700">國王湖</text><text x="176" y="204" font-size="12" fill="#23406B" font-weight="700">琉森湖</text>
+</svg>
+<h1>德瑞義 20 天自助旅行手帳</h1>
+<p class="sub">2027/1/27（三）– 2/15（一）・20 天 19 夜（住宿 17 夜＋機上 2 夜）・6 位成人</p>
+<div class="count" id="count"></div>
+<nav id="nav"></nav>
+</header>
+
+<section id="overview">
+<h2>✈ 航班</h2>
+<p class="sub">班號與時間取自行程表，請對照電子機票。座位、登機門、訂位代號為空白，可日後填入。<span class="demo">示範資料</span></p>
+<div id="flights"></div>
+<div class="card"><h3>時差小提醒</h3>台灣（UTC+8）比德國、瑞士、義大利（冬季 UTC+1）快 7 小時；歐洲夏令時間要到 3 月底才開始，本趟旅程不受影響。</div>
+<div class="card"><h3>票券一覽（來自行程表）</h3>瑞士通行證：二等座、連續 15 天（已購買）。冰河列車：已訂位。慕尼黑與巴伐利亞邦票：現場購買，平日 09:00 後才可使用。米蘭：跨國火車票與 1 日票另購。折扣以官方現行規定為準。</div>
+</section>
+
+<section id="list">
+<h2>✅ 出發前準備</h2>
+<div class="card"><b id="pt">0 / 0</b>　已完成<div class="bar"><div id="pb"></div></div></div>
+<div class="card"><h3>行前待辦</h3><div id="L1"></div><div class="add"><input id="n1" placeholder="新增待辦"><button class="btn" data-add="1">新增</button></div></div>
+<div class="card"><h3>行李準備</h3><div id="L2"></div><div class="add"><input id="n2" placeholder="新增物品"><button class="btn" data-add="2">新增</button></div></div>
+</section>
+
+<section id="daily"><h2>📅 每日行程</h2><p class="sub">景點、餐廳、車程與天氣皆為示範資料，請以官方班次與實際訂位為準。春節連假（台灣 2/4–2/10）為紅色，週末為粉色。</p><div id="strip"></div><div id="day"></div></section>
+<section id="map"><h2>🗺️ 行程簡圖</h2><p class="sub">公里、時數、海拔與車程皆為示範估算，用來檢查每天是否太累，請以官方時刻表為準。路線圖：<b style="color:#D9482F">紅色＝上午（上排）</b>，<b style="color:#2F7D6B">綠色＝下午（下排）</b>。</p>
+<div class="card"><h3 style="margin-top:0">20 天一覽</h3><div style="overflow-x:auto"><table id="mt"></table></div><p class="sub">⚠ 表示移動超過 6 小時或海拔超過 3000 公尺。</p></div>
+<div class="card"><h3 style="margin-top:0">末班車提醒（示範）</h3><p><span class="tag">慕尼黑</span>地鐵與 S-Bahn 到深夜，週末班次減少，晚歸先查 MVG。</p><p><span class="tag">瑞士平地</span>幹線末班多在 23:00–00:30，支線更早。</p><p><span class="tag">山區</span>登山列車與纜車冬季末班下山多在 16:00–17:30，請預留 1 小時緩衝。</p><p><span class="tag">渡輪</span>冬季班次很少，出發前確認。</p><p><span class="tag">義大利</span>米蘭往馬爾彭薩的 S50 末班請前一晚查 Trenord。</p></div>
+<div id="md"></div></section>
+<section id="storm"><h2>❄️ 暴風雪備案</h2>
+<div class="card"><h3 style="margin-top:0">每天出發前的決定流程</h3><p>1. 前一晚與當天 07:00 查看官網運行公告。<br>2. 打開山頂即時攝影，看能見度與風雪。<br>3. 查氣象與雪崩資訊。<br>4. 山頂雲層全白、強風或停駛：改走備案。</p><a class="btn map" target="_blank" rel="noopener" href="https://www.meteoswiss.admin.ch/">瑞士氣象 MeteoSwiss</a> <a class="btn map" target="_blank" rel="noopener" href="https://www.slf.ch/en/">雪崩資訊 SLF</a><p class="sub">連結為官方網站首頁，我尚未逐一驗證，攝影機請在站內找 Webcam。備案地址與費用為示範資料，出發前核對。</p></div>
+<div id="sd"></div></section>
+
+<section id="stay">
+<h2>🏨 住宿速查</h2>
+<p class="sub">地址、車站、訂房編號等欄位可直接填寫，會自動存在這支手機。<span class="demo">示範資料</span></p>
+<div id="hotels"></div>
+<div class="card"><h3>伴手禮與退稅（示範）</h3>
+<p><span class="tag">德國</span>啤酒杯、薑餅、藥妝。退稅門檻與規定出發前請查證。</p>
+<p><span class="tag">瑞士</span>巧克力、瑞士刀、起司。瑞士週日多數商店休息。</p>
+<p><span class="tag">義大利</span>咖啡、橄欖油、皮件。退稅在機場辦理，需預留時間。</p></div>
+<div class="card"><h3>旅遊資訊速查</h3>
+<div class="f"><span>保險公司</span><input data-k="ins1" placeholder="空白"></div>
+<div class="f"><span>保單號碼</span><input data-k="ins2" placeholder="空白"></div>
+<div class="f"><span>餐廳訂位</span><input data-k="res" placeholder="空白"></div>
+<h3>緊急電話</h3>
+<p><span class="tag">德國</span>警察 110・消防與救護 112</p>
+<p><span class="tag">瑞士</span>警察 117・消防 118・救護 144</p>
+<p><span class="tag">義大利</span>統一 112・警察 113・救護 118</p>
+<p class="sub">台灣的 119 在歐洲不適用。</p></div>
+<div class="card"><h3>總支出</h3><div id="tot"></div></div>
+<div class="card"><h3>備份</h3><button class="btn" id="exp">匯出備份</button> <button class="btn" id="imp">匯入備份</button><input type="file" id="file" accept=".json" hidden></div>
+</section>
+<button class="back" onclick="go('overview')">⬆ 返回主選單</button>
+
+<script>
+/* ===== 資料區：示範資料請在此替換 ===== */
+const TABS=[['overview','🧭','總覽'],['list','✅','行前清單'],['daily','📅','每日行程'],['map','🗺️','行程簡圖'],['storm','❄️','暴風雪備案'],['stay','🏨','住宿速查']];
+const FLIGHTS=[
+ {dir:'去程',al:'長榮航空 EVA Air',no:'BR071',from:'TPE 桃園',fT:'第二航廈',fd:'1/27（三）',ft:'23:25',to:'MUC 慕尼黑',tT:'第二航廈',td:'1/28（四）',tt:'07:05',dur:'14 小時 40 分'},
+ {dir:'回程',al:'長榮航空 EVA Air',no:'BR096',from:'MXP 米蘭馬爾彭薩',fT:'第一航廈',fd:'2/14（日）',ft:'11:00',to:'TPE 桃園',tT:'第二航廈',td:'2/15（一）',tt:'06:10',dur:'12 小時 10 分'}];
+const STAYS=[
+ {id:'h1',n:'Hampton by Hilton Munich City West',c:'慕尼黑',from:'2027-01-28',to:'2027-01-31',nt:3,meal:'含早餐'},
+ {id:'h2',n:'Waldstaetterhof Swiss Quality',c:'琉森',from:'2027-01-31',to:'2027-02-04',nt:4,meal:'不含早餐'},
+ {id:'h3',n:'Apartment Alpegloggli – GRIWA RENT AG',c:'因特拉肯',from:'2027-02-04',to:'2027-02-08',nt:4,meal:'不含早餐',addr:'Rugenparkstrasse 19'},
+ {id:'h4',n:'Alpenblick Zermatt',c:'策馬特',from:'2027-02-08',to:'2027-02-11',nt:3,meal:'含早餐'},
+ {id:'h5',n:'Hotel Admiral Lugano',c:'盧加諾',from:'2027-02-11',to:'2027-02-13',nt:2,meal:'含早餐'},
+ {id:'h6',n:'米蘭馬爾彭薩機場飯店（待訂）',c:'米蘭',from:'2027-02-13',to:'2027-02-14',nt:1,meal:'空白'}];
+const TODO=['確認護照效期（建議出發時仍有 6 個月以上）','確認歐洲入境規定與電子授權','核對機票與電子登機資訊','確認 6 間住宿訂單與入住時間','核對瑞士通行證與冰河列車訂位','購買旅遊保險並分享給同行者','準備 eSIM 或國際漫遊','換匯歐元與瑞郎，確認信用卡海外刷卡','下載 SBB、DB Navigator 與離線地圖','預約台中住家往返機場接駁'];
+const PACK=[['證件錢','護照與影本'],['證件錢','歐元與瑞郎現金'],['證件錢','信用卡與提款卡'],['證件錢','保險資料與電子票券截圖'],['衣','發熱衣與保暖內層'],['衣','防風防水外套'],['衣','毛帽、手套、圍巾'],['衣','雪地襪與換洗衣物'],['衣','防滑防水雪靴'],['衣','太陽眼鏡或雪鏡'],['食','保溫瓶'],['食','零食與即食湯品'],['食','環保購物袋'],['住','盥洗用品（歐洲飯店未必提供牙刷）'],['住','保濕乳液與護唇膏'],['住','個人藥品與暈車藥'],['住','暖暖包'],['行','歐規轉接頭'],['行','行動電源（隨身攜帶）'],['行','手機與充電線'],['行','摺疊雨傘或輕便雨衣'],['行','行李鎖與行李束帶']];
+
+/* ===== 每日行程資料（示範資料，可直接修改）=====
+ 格式：[種類 s景點 f餐廳 p購物 h機場飯店, 時間, 名稱, 停留, 說明, 必去(1), 到下一站的交通] */
+const WX={T:['⛅',18,12,30,'降雨','輕便外套即可'],M:['⛅',2,-4,30,'降雪','洋蔥式穿搭：發熱衣＋毛衣＋防風外套，帶帽子與手套'],L:['☁️',3,-2,35,'降雪','保暖外套＋防滑鞋，湖邊風大加圍巾'],I:['🌨️',2,-4,40,'降雪','防水外套與防滑雪靴，山上更冷'],Z:['❄️',-2,-10,45,'降雪','厚羽絨、雪靴、護目鏡，山頂可能低於 -15°C'],G:['⛅',8,0,25,'降雨','比山區暖，一件厚外套即可'],X:['☁️',7,1,20,'降雨','保暖外套，逛街穿好走的鞋']};
+const DAYS=[
+{c:'T',s:null,i:[['h','空白','台中住家接駁 → 桃園機場第二航廈','','接駁時間請自行填寫'],['h','23:25','搭乘 BR071 起飛','','機上過夜']]},
+{c:'M',s:'h1',i:[['h','07:05','抵達慕尼黑機場第二航廈、入境','','',0,'S-Bahn｜機場 → 中央車站｜約 40 分'],['h','09:00','飯店寄放行李','','Hampton by Hilton City West',0,'地鐵｜步行 5–10 分'],['s','10:30','卡爾廣場＋老植物園','1.5h','',0,'步行｜約 10 分'],['f','12:30','巴伐利亞傳統餐廳','1.5h','德國菜｜烤豬腳 Schweinshaxe｜約 €25–35/人｜建議訂位'],['s','14:30','新市政廳＋瑪莉亞廣場','1h','木偶報時鐘時間以官方為準',1,'步行｜約 15 分'],['s','16:00','英國花園、慕尼黑王宮','2h','王宮視開放時間',0,'地鐵｜回飯店'],['f','18:30','啤酒屋晚餐','1.5h','巴伐利亞菜｜香腸與酸菜｜約 €25/人｜週末建議訂位']],a:['國王廣場','慕尼黑王宮']},
+{c:'M',s:'h1',i:[['h','09:00','飯店出發（邦票 09:00 後可用）','','',0,'地鐵 U3｜→ 奧林匹克公園｜約 25 分'],['s','10:00','奧林匹克公園','2h','登塔視天氣',0],['f','12:30','公園附近午餐','1h','德國菜｜炸肉排｜約 €15–20/人'],['s','14:30','寧芬堡宮','2h','皇家夏宮與花園',1,'電車＋地鐵｜回市區｜約 30 分'],['p','17:00','慕尼黑市區購物','1.5h','藥妝、伴手禮｜退稅規定以現場為準'],['f','19:00','晚餐','1.5h','自選｜約 €20–30/人']],a:['寧芬堡宮','德意志博物館']},
+{c:'M',s:'h1',i:[['h','08:00','飯店 → 慕尼黑中央車站','','週六邦票可全天使用',0,'火車｜中央車站 → 國王湖 Königssee｜約 2.5–3 小時（含轉車）'],['s','11:00','國王湖遊船與湖景','3h','冬季船班與結冰情形請先確認',1],['f','14:00','湖畔午餐','1h','德國菜｜烤鱒魚｜約 €20/人',0,'火車｜回慕尼黑｜約 2.5–3 小時'],['f','19:00','市區晚餐','1.5h','自選｜約 €25/人']],a:['施萊斯海姆宮']},
+{c:'L',s:'h2',i:[['h','08:00','飯店 → 慕尼黑中央車站','','',0,'跨國火車 ECE98｜慕尼黑 → 聖加侖｜待購票'],['s','12:30','聖加侖車站寄放行李＋午餐','1.5h','瑞士菜｜聖加侖小牛香腸｜約 CHF 25/人',0,'步行｜約 10 分'],['s','14:00','聖加侖修道院圖書館','1.5h','世界遺產',1,'IR VAE 阿爾卑斯山麓快車｜聖加侖 → 琉森'],['h','17:30','琉森飯店放行李、入住','','Waldstaetterhof',0,'步行｜約 10 分'],['s','18:00','琉森老城與卡貝爾橋','1h','夜景好看',1],['f','19:30','起司鍋晚餐','1.5h','瑞士菜｜起司鍋 Fondue｜約 CHF 40–55/人｜建議訂位'],['p','','瑞士刀、巧克力','','週日多數商店休息｜退稅以現場為準']]},
+{c:'L',s:'h2',i:[['s','09:12','琉森渡輪 → 菲茲瑙 Vitznau','57 分','09:12 開船，10:09 抵達',0,'登山列車｜菲茲瑙 → 瑞吉山頂｜約 30 分'],['s','10:45','瑞吉山頂 Rigi Kulm','2h','視野看天氣',1,'火車｜→ 阿爾特-戈道 Arth-Goldau'],['f','13:30','阿爾特-戈道午餐','1h','瑞士菜｜薯餅 Rösti｜約 CHF 25/人',0,'火車｜→ 施維茨 Schwyz → Stoosbahnen'],['s','15:00','Stoos 登山觀景與纜車','2h','特殊陡坡纜車',1,'公車＋火車｜回琉森'],['f','19:00','琉森晚餐','1.5h','自選｜約 CHF 35/人']],a:['瑞士交通博物館','布爾巴基全景館','瑞士刀工廠']},
+{c:'L',s:'h2',i:[['h','08:00','飯店 → 琉森車站','','',0,'火車｜琉森 → 蘇黎世 → Neuhausen Rheinfall｜約 1.5–2 小時'],['s','10:30','萊茵瀑布 Rheinfall','1.5h','歐洲最大瀑布',1,'火車 S9｜→ 沙夫豪森'],['f','12:30','沙夫豪森午餐','1h','瑞士菜｜約 CHF 25/人',0,'火車｜→ 施泰因 Stein am Rhein'],['s','14:00','施泰因老城濕壁畫','1.5h','',0,'火車｜→ 溫特圖爾 → 蘇黎世'],['s','16:30','蘇黎世林登霍夫山','1h','日落約 17:30',0],['f','18:30','蘇黎世晚餐','1.5h','自選｜約 CHF 35/人',0,'火車｜回琉森｜約 50 分']],a:['瑞士國立博物館','雷特伯格博物館','林特巧克力工廠']},
+{c:'L',s:'h2',i:[['h','09:00','飯店 → 琉森車站','','',0,'火車 IR｜09:10 開 → 09:53 抵達英格堡｜公車接纜車站'],['s','10:30','鐵力士山（含冰洞、懸崖步道）','5h','纜車 5 折｜以現場為準',1],['f','13:00','山頂自助午餐','1h','自助餐｜約 CHF 30/人'],['s','15:00','特呂布湖雪地活動','1.5h','',0,'纜車＋火車｜回琉森'],['h','18:00','取行李、拉到車站託運','','明日搬因特拉肯'],['f','19:00','琉森晚餐','1.5h','自選｜約 CHF 35/人']],a:['琉森文化和會議中心','卡貝爾橋','耶穌會教堂']},
+{c:'I',s:'h3',i:[['h','09:00','飯店 → 琉森車站','','',0,'Luzern–Interlaken Express｜每小時 :06 發車｜約 2 小時'],['s','10:30','龍疆湖景、布里恩茲湖景','1.5h','沿線停靠看湖',0,'火車｜→ 因特拉肯東站'],['f','12:30','因特拉肯東站午餐','1h','自選｜約 CHF 25/人',0,'公車｜→ 伊瑟爾特瓦爾德'],['s','14:30','伊瑟爾特瓦爾德湖景','1.5h','',0,'公車＋火車｜回因特拉肯'],['h','16:30','Apartment Alpegloggli 入住','','Rugenparkstrasse 19'],['f','18:30','因特拉肯西站晚餐','1.5h','自選｜約 CHF 35/人']],a:['琉森玻璃吹製工廠']},
+{c:'I',s:'h3',i:[['h','08:00','飯店 → 因特拉肯西站','','除夕',0,'火車｜→ 東站 → 格林德瓦總站'],['s','09:30','艾格快線纜車','1h','',0,'纜車｜→ 艾格冰河站 → 少女峰站'],['s','11:00','少女峰站 Jungfraujoch（冰洞）','4h','山頂高海拔，慢走多喝水',1],['f','13:30','山頂自助午餐','1h','自助餐｜約 CHF 30/人',0,'登山列車｜→ 小夏戴克 → 溫根 → 勞特布龍嫩'],['s','16:30','勞特布龍嫩瀑布','1h','',0,'火車｜→ 因特拉肯東／西站'],['h','18:00','取行李、託運行李','',''],['f','19:00','除夕晚餐','1.5h','自選｜約 CHF 40/人｜建議訂位']],a:['因特拉肯歷史博物館','格林德瓦博物館']},
+{c:'I',s:'h3',i:[['h','08:00','飯店 → 因特拉肯西站','','初一',0,'火車｜→ 東站 → 格林德瓦'],['s','09:30','First 纜車','1h','',0,'纜車'],['s','10:30','First 雪地活動','3h','雪橇、懸崖步道',1],['f','13:30','山上自助午餐','1h','約 CHF 30/人',0,'纜車＋火車｜回因特拉肯'],['h','17:00','取行李、託運行李','',''],['f','19:00','晚餐','1.5h','自選｜約 CHF 35/人']],a:['因特拉肯歷史博物館','格林德瓦博物館']},
+{c:'I',s:'h3',i:[['h','08:00','飯店 → 因特拉肯西站','','',0,'火車｜→ 施皮茨'],['s','09:00','施皮茨老城','1h','',0,'渡輪｜施皮茨 → 圖恩｜約 1 小時'],['s','10:30','圖恩 → 伯恩','','',0,'火車｜→ 伯恩｜約 20 分'],['f','12:00','伯恩午餐','1h','瑞士菜｜約 CHF 25/人',0,'步行'],['s','13:00','伯恩老城（噴泉、時鐘塔、熊公園）','2.5h','世界遺產',1,'火車｜→ 圖恩'],['s','16:30','圖恩城堡','1h','週日 13:00–16:00，出發前確認',0,'火車｜→ 因特拉肯西站'],['f','18:30','因特拉肯晚餐','1.5h','自選｜約 CHF 35/人']],a:['施皮茨玩具博物館','圖恩城堡']},
+{c:'Z',s:'h4',i:[['h','09:00','飯店 → 因特拉肯西站','','',0,'步行＋公車｜→ 貝亞圖斯洞'],['s','09:40','貝亞圖斯洞 St. Beatus Caves','2h','若未開放，改搭上午火車到策馬特',1,'公車｜→ 因特拉肯西站'],['f','12:30','因特拉肯午餐','1h','自選｜約 CHF 25/人',0,'火車｜→ 施皮茨 → 菲斯普 Visp → 策馬特'],['h','16:30','策馬特車站取行李','','電動車與步行為主',0,'步行｜至 Alpenblick Zermatt｜約 10 分'],['s','17:30','策馬特市區','1h','',0],['f','19:00','晚餐','1.5h','瑞士菜｜約 CHF 40/人｜建議訂位']],a:[]},
+{c:'Z',s:'h4',i:[['h','08:00','飯店 → 策馬特車站','','',0,'步行｜約 10 分'],['s','08:30','戈爾內格拉特登山鐵路 → Gornergrat','5h','馬特洪峰最佳視野',1,'登山列車｜來回約 33 分/段'],['f','12:30','山頂自助午餐','1h','約 CHF 30/人'],['s','15:00','馬特洪峰博物館','1h','15:00 開始營業',0],['f','18:30','晚餐','1.5h','瑞士菜｜約 CHF 40/人']],a:['馬特洪峰博物館','天主教教堂']},
+{c:'Z',s:'h4',i:[['h','08:00','飯店 → 策馬特纜車站','','',0,'纜車｜→ 馬特洪峰冰川天堂'],['s','09:00','冰川天堂 Matterhorn Glacier Paradise','5h','歐洲最高纜車站之一',1],['f','13:00','山頂自助午餐','1h','約 CHF 30/人',0,'纜車｜回策馬特'],['s','15:30','策馬特市區','1.5h','',0],['h','17:30','拉行李至車站託運','','明日早班冰河列車'],['f','19:00','晚餐','1.5h','自選｜約 CHF 40/人']],a:[]},
+{c:'G',s:'h5',i:[['h','07:20','飯店 → 策馬特車站','','',0,'冰河列車 920｜07:52 開｜→ 安德瑪特'],['s','08:00','冰河列車景觀','4h','需訂位（已完成）',1],['f','12:30','安德瑪特午餐、觀光','2h','瑞士菜｜約 CHF 25/人',0,'火車｜→ 格申恩 → 貝林佐納'],['s','15:30','貝林佐納','1h','',0,'火車、公車｜→ 帕拉迪索'],['h','18:00','Hotel Admiral Lugano 入住','',''],['f','19:00','帕拉迪索晚餐','1.5h','義式瑞士菜｜約 CHF 35/人']],a:[]},
+{c:'G',s:'h5',i:[['h','09:00','飯店 → 帕拉迪索車站','','',0,'火車｜→ 盧加諾'],['s','10:00','盧加諾湖畔與老城','3h','',1],['f','13:00','午餐','1h','提契諾菜｜燉飯｜約 CHF 25/人'],['s','15:00','聖喬治山遺跡','2h','',0],['f','18:30','帕拉迪索晚餐','1.5h','約 CHF 35/人']],a:['藝術博物館','兒童博物館']},
+{c:'X',s:'h6',i:[['h','09:00','飯店 → 帕拉迪索車站','','',0,'跨國火車｜→ 米蘭中央車站｜約 1.5–2 小時'],['h','10:19','米蘭 → 馬爾彭薩機場','','S50（尚未購票）',0,'火車 S50｜約 40–50 分'],['h','12:00','機場飯店寄放行李','','待訂',0,'火車｜→ 米蘭市區'],['s','14:00','米蘭大教堂與艾曼紐二世迴廊','2.5h','',1],['p','16:30','米蘭購物','2h','退稅在機場辦理，預留時間'],['f','19:00','義大利晚餐','1.5h','義大利菜｜米蘭燉飯｜約 €25–35/人｜建議訂位']],a:[]},
+{c:'X',s:'h6',i:[['h','07:30','飯店 → 機場第一航廈','','',0],['h','11:00','搭乘 BR096 起飛','','機上過夜']]},
+{c:'T',s:null,i:[['h','06:10','抵達桃園機場第二航廈','','',0,'接駁｜桃園 → 台中住家'],['h','空白','回到台中住家','','歡迎回家']]}];
+
+/* ===== 行程簡圖與備案資料（示範估算，可修改）[公里,移動時數,最高海拔m,區域,提示] ===== */
+const KM=[[0,0,0,'台灣→機上','夜間航班'],[40,1.5,520,'慕尼黑','時差：先撐到晚上'],[30,1.5,520,'慕尼黑近郊',''],[300,5.5,603,'國王湖','來回約 5–6 小時，日照短'],[370,6.5,670,'聖加侖→琉森','⚠ 跨國移動日'],[120,3,1798,'瑞吉山・Stoos','渡輪與登山列車'],[250,4.5,500,'蘇黎世・萊茵瀑布','轉車多，可刪溫特圖爾'],[100,2.5,3238,'鐵力士山','⚠ 高海拔'],[100,3,800,'琉森→因特拉肯','景觀路線'],[90,3.5,3454,'少女峰','⚠ 高海拔，除夕'],[40,2.5,2168,'First','雪地活動'],[140,3,600,'伯恩・圖恩','平緩'],[150,4,1608,'因特拉肯→策馬特','搬家日'],[20,1.5,3089,'Gornergrat','⚠ 高海拔'],[15,1.5,3883,'冰川天堂','⚠ 全程最高'],[280,7,2033,'冰河列車→盧加諾','⚠ 全天乘車'],[10,1,700,'盧加諾','輕鬆'],[130,4,150,'帕拉迪索→米蘭','跨國，注意退稅時間'],[50,1,150,'米蘭→返程','早起搭機'],[0,0,0,'返抵台灣','']];
+const LK={DB:['德國鐵路 DB','https://int.bahn.de/en'],SBB:['瑞士鐵路 SBB','https://www.sbb.ch/en'],MVG:['慕尼黑 MVG','https://www.mvg.de/en'],KS:['國王湖遊船','https://www.seenschifffahrt.de'],RIGI:['瑞吉山（含攝影）','https://www.rigi.ch/en'],STOOS:['Stoos（含攝影）','https://www.stoos.ch/en'],LAKE:['琉森湖渡輪','https://www.lakelucerne.ch/en'],TIT:['鐵力士山（含攝影）','https://www.titlis.ch/en'],JUNG:['少女峰地區（含攝影）','https://www.jungfrau.ch/en-gb/'],BLS:['圖恩湖渡輪 BLS','https://www.bls.ch/en'],GOR:['Gornergrat（含攝影）','https://www.gornergrat.ch/en'],MGP:['冰川天堂（含攝影）','https://www.matterhornparadise.ch/en'],GLA:['冰河列車','https://www.glacierexpress.ch/en'],TRN:['義大利 Trenitalia','https://www.trenitalia.com/en.html']};
+const DL={2:['MVG'],3:['MVG'],4:['KS','DB'],5:['DB','SBB'],6:['RIGI','STOOS','LAKE','SBB'],7:['SBB'],8:['TIT','SBB'],9:['SBB'],10:['JUNG','SBB'],11:['JUNG','SBB'],12:['BLS','SBB'],13:['SBB'],14:['GOR','SBB'],15:['MGP','SBB'],16:['GLA','SBB'],17:['SBB'],18:['SBB','TRN']};
+const SUG={3:['老繪畫陳列館'],7:['蘇黎世美術館'],8:['琉森冰河公園'],15:['策馬特老村'],18:['布雷拉美術館']};
+/* 地址|最近車站|特色|參觀時間|費用 */
+const ALT={'國王廣場':'Königsplatz, 80333 München|U2 Königsplatz|古典廣場與博物館區|1–2h|廣場免費','慕尼黑王宮':'Residenzstraße 1, 80333 München|U3/U6 Odeonsplatz|王室宮殿與寶庫|1.5–2h|空白','寧芬堡宮':'Schloß Nymphenburg 1, 80638 München|Tram 17 Schloss Nymphenburg|夏宮與花園|2h|空白','德意志博物館':'Museumsinsel 1, 80538 München|S-Bahn Isartor|大型科技博物館|3h|空白','施萊斯海姆宮':'Max-Emanuel-Platz 1, 85764 Oberschleißheim|S1 Oberschleißheim|巴洛克宮殿群|2h|空白','瑞士交通博物館':'Lidostrasse 5, 6006 Luzern|公車 Verkehrshaus|交通與航太，室內為主|3h|空白','布爾巴基全景館':'Löwenstrasse 18, 6004 Luzern|琉森車站步行|大型圓形全景畫|1h|空白','瑞士刀工廠':'Schmiedgasse 57, 6438 Ibach|施維茨公車|刀具參觀與商店|1–1.5h|空白','瑞士國立博物館':'Museumstrasse 2, 8001 Zürich|蘇黎世車站旁|瑞士歷史|2h|空白','雷特伯格博物館':'Gablerstrasse 15, 8002 Zürich|Tram 7|亞洲與非洲藝術|1.5h|空白','林特巧克力工廠':'Schokoladenplatz 1, 8802 Kilchberg|S-Bahn Kilchberg|巧克力展與試吃|2h|空白','琉森文化和會議中心':'Europaplatz 1, 6005 Luzern|琉森車站旁|湖畔建築與音樂廳|1h|空白','卡貝爾橋':'Kapellbrücke, 6003 Luzern|琉森車站步行 5 分|木造廊橋|0.5h|免費','耶穌會教堂':'Bahnhofstrasse 11a, 6003 Luzern|琉森車站步行 5 分|巴洛克教堂|0.5h|免費','琉森玻璃吹製工廠':'Seestrasse 12, 6052 Hergiswil|Hergiswil 站|玻璃工坊與體驗|1–2h|空白','因特拉肯歷史博物館':'空白（出發前查證）|因特拉肯西站|地方歷史|1h|空白','格林德瓦博物館':'空白（出發前查證）|格林德瓦站|山區生活與登山史|1h|空白','施皮茨玩具博物館':'空白（出發前查證）|施皮茨站|玩具展|1h|空白','圖恩城堡':'Schlossberg 1, 3600 Thun|圖恩站步行 15 分|中世紀城堡|1h|空白（週日 13:00–16:00）','馬特洪峰博物館':'Hofmattstrasse 4, 3920 Zermatt|策馬特車站步行 5 分|登山史|1h|空白（15:00 起營業）','天主教教堂':'Kirchplatz, 3920 Zermatt|策馬特車站步行 5 分|聖莫里斯教堂|0.5h|免費','藝術博物館':'Piazza Bernardino Luini 6, 6900 Lugano|盧加諾車站步行或公車|MASI 藝術館|1.5h|空白','兒童博物館':'空白（出發前查證）|空白|親子室內活動|1.5h|空白','老繪畫陳列館':'Barer Str. 27, 80333 München|U2 Theresienstraße|名畫館|2h|空白','蘇黎世美術館':'Heimplatz 1, 8001 Zürich|Tram Kunsthaus|館藏豐富|2h|空白','琉森冰河公園':'Denkmalstrasse 4, 6006 Luzern|公車 Löwenplatz|冰河遺跡與鏡廳|1.5h|空白','策馬特老村':'Hinterdorf, 3920 Zermatt|策馬特車站步行 10 分|木屋老村|1h|免費','布雷拉美術館':'Via Brera 28, 20121 Milano|M2 Lanza|義大利繪畫|1.5h|空白'};
+/* ===== 程式區 ===== */
+const $=s=>document.querySelector(s),KEY='trip_v1';
+let S={done:{},extra:[],del:{},f:{}};try{S=Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+S.dn=S.dn||{};S.ex=S.ex||{};S.rate=S.rate||{USD:32,EUR:35,CHF:36,TWD:1};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+function go(id){document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));if(id==='map')drawMap();if(id==='storm')drawStorm();window.scrollTo({top:0,behavior:'smooth'})}
+$('#nav').innerHTML=TABS.map(t=>`<button data-t="${t[0]}"><span>${t[1]}</span>${t[2]}</button>`).join('');
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.t)};
+$('#flights').innerHTML=FLIGHTS.map(f=>`<div class="card bp"><div class="hd"><span>${f.dir}・${f.al}</span><span>${f.no}</span></div><div class="bd"><div class="rt"><div><big>${f.from.slice(0,3)}</big>${f.from.slice(4)}</div><div class="mid">✈ ${f.dur}</div><div><big>${f.to.slice(0,3)}</big>${f.to.slice(4)}</div></div>
+<div class="grid"><div><i>出發</i>${f.fd} ${f.ft}</div><div><i>抵達（當地時間）</i>${f.td} ${f.tt}</div><div><i>出發航廈</i>${f.fT}</div><div><i>抵達航廈</i>${f.tT}</div><div><i>座位</i>空白</div><div><i>訂位代號</i>空白</div></div></div></div>`).join('');
+function tick(){const now=Date.now(),st=new Date('2027-01-27T23:25:00+08:00').getTime(),c=$('#count');
+ if(now<st){const d=st-now,D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4);c.innerHTML=`距離出發還有<br><b>${D}</b> 天 <b>${H}</b> 時 <b>${M}</b> 分`;return}
+ const day=Math.floor((now-new Date('2027-01-27T00:00:00+08:00'))/864e5)+1;
+ if(day>20){c.innerHTML='旅程結束，歡迎回家！';return}
+ const d=new Date(),ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,h=STAYS.find(x=>ds>=x.from&&ds<x.to);
+ c.innerHTML=`旅行第 <b>${day}</b> / 20 天<br>${h?'今晚住宿：'+h.c+'・'+h.n:'今晚在機上'}<br><span style="font-size:14px">${nextOf(day)}</span>`}
+tick();setInterval(tick,3e4);
+function items(){const a=[];TODO.forEach((t,i)=>a.push({id:'t'+i,s:1,t}));PACK.forEach((p,i)=>a.push({id:'p'+i,s:2,t:p[1],g:p[0]}));S.extra.forEach(e=>a.push(e));return a.filter(x=>!S.del[x.id])}
+function drawList(){const all=items();let dn=0;[1,2].forEach(s=>{const arr=all.filter(x=>x.s===s);let h='',g='';arr.forEach(x=>{if(s===2&&x.g!==g&&x.g){g=x.g;h+=`<p class="sub" style="margin-top:8px"><span class="tag">${g==='證件錢'?'證件與錢':g}</span></p>`}
+ const d=S.done[x.id];if(d)dn++;h+=`<div class="it ${d?'d':''}"><input type="checkbox" id="c${x.id}" data-id="${x.id}" ${d?'checked':''}><label for="c${x.id}">${x.t}</label><button data-del="${x.id}" aria-label="刪除">×</button></div>`});$('#L'+s).innerHTML=h});
+ $('#pt').textContent=`${dn} / ${all.length}（${all.length?Math.round(dn/all.length*100):0}%）`;$('#pb').style.width=(all.length?dn/all.length*100:0)+'%'}
+$('#list').onclick=e=>{const t=e.target;if(t.dataset.del){S.del[t.dataset.del]=1;save();drawList()}else if(t.dataset.add){const i=$('#n'+t.dataset.add),v=i.value.trim();if(v){S.extra.push({id:'x'+Date.now(),s:+t.dataset.add,t:v});i.value='';save();drawList()}}};
+$('#list').onchange=e=>{if(e.target.dataset.id){S.done[e.target.dataset.id]=e.target.checked;save();drawList()}};
+drawList();
+const FL=[['addr','地址'],['stn','最近車站'],['walk','步行時間'],['cin','入住時間'],['cout','退房時間'],['no','訂房編號']];
+$('#hotels').innerHTML=STAYS.map(h=>`<div class="card"><h3 style="margin-top:0">${h.n}</h3><p style="margin:0 0 6px"><span class="tag">${h.c}</span>${h.from.slice(5).replace('-','/')} – ${h.to.slice(5).replace('-','/')}（${h.nt} 晚・${h.meal}）</p>
+${FL.map(f=>`<div class="f"><span>${f[1]}</span><input data-k="${h.id}${f[0]}" placeholder="空白" value="${h.addr&&f[0]==='addr'?h.addr:''}"></div>`).join('')}
+<a class="btn map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.n+' '+h.c)}">📍 開啟 Google 地圖</a></div>`).join('');
+document.querySelectorAll('[data-k]').forEach(i=>{if(S.f[i.dataset.k]!==undefined)i.value=S.f[i.dataset.k];i.oninput=()=>{S.f[i.dataset.k]=i.value;save()}});
+$('#exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='trip-backup.json';a.click()};
+$('#imp').onclick=()=>$('#file').click();
+$('#file').onchange=e=>{const r=new FileReader();r.onload=()=>{try{S=Object.assign({done:{},extra:[],del:{},f:{}},JSON.parse(r.result));save();location.reload()}catch(x){alert('備份檔格式不正確')}};if(e.target.files[0])r.readAsText(e.target.files[0])};
+
+const WD='日一二三四五六',LUN=['小年夜','除夕','初一','初二','初三','初四','初五','初六','初七','初八','初九','初十'],dt=n=>new Date(2027,0,26+n),CUR=['TWD','USD','EUR','CHF'];
+let cur=1,rain=false;
+const rate=c=>+S.rate[c]||0,dayTot=n=>(S.ex[n]||[]).reduce((s,e)=>s+e.a*rate(e.c),0),fm=v=>Math.round(v).toLocaleString();
+function nextOf(day){const d=DAYS[day-1],i=d.i.findIndex((x,k)=>!S.dn['d'+day+'_'+k]);return i<0?'今日行程全部完成':'下一個：'+d.i[i][1]+' '+d.i[i][2]}
+const mp=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+function strip(){$('#strip').innerHTML=Array.from({length:20},(_,k)=>{const n=k+1,d=dt(n),w=d.getDay(),c=(n===cur?'on ':'')+(n>=9&&n<=15?'hol':(w%6===0?'wk':''));return `<button class="${c}" data-n="${n}">第${n}天<b>${d.getMonth()+1}/${d.getDate()}</b>週${WD[w]}${n>=9?'<small>'+LUN[n-9]+'</small>':''}</button>`}).join('')}
+function drawDay(){const n=cur,D=DAYS[n-1],W=WX[D.c],H=STAYS.find(x=>x.id===D.s),d=dt(n),open=$('#sum')&&$('#sum').classList.contains('open');
+ const cards=D.i.map((x,k)=>{const dn=S.dn['d'+n+'_'+k],loc=/起飛|接駁|回到/.test(x[2]);return `<div class="cd k${x[0]} ${dn?'dn':''}" style="animation-delay:${k*70}ms"><div class="ct"><input type="checkbox" id="k${k}" data-k="${k}" ${dn?'checked':''}><label for="k${k}"><b>${x[1]}</b> ${x[2]} ${x[5]?'<span class="must">必去</span>':''}</label></div><div class="cn">${x[3]?'停留 '+x[3]+'　':''}${x[4]||''}</div>${loc?'':`<a class="btn map" style="margin:0 0 0 36px;min-height:36px;line-height:20px;padding:6px 12px" target="_blank" rel="noopener" href="${mp(x[2].replace(/飯店 → /,'')+' '+(H?H.c:''))}">📍 地圖</a>`}</div>${x[6]?`<div class="tr">🚆 ${x[6]}</div>`:''}`}).join('');
+ const alt=D.a&&D.a.length?D.a.map(a=>`<div class="cd ks"><b>${a}</b> <a class="btn map" style="min-height:36px;line-height:20px;padding:6px 12px" target="_blank" rel="noopener" href="${mp(a+' '+(H?H.c:''))}">📍 地圖</a></div>`).join('<div style="height:8px"></div>'):'<div class="cd">這天沒有備案，可改去室內餐廳或咖啡館。</div>';
+ const ex=S.ex[n]||[];
+ $('#day').innerHTML=`<div id="sum" class="card sum ${open?'open':''}"><b>第 ${n} 天・${d.getMonth()+1}/${d.getDate()}（${WD[d.getDay()]}）${W[0]} ${W[2]}°～${W[1]}° ${W[4]}機率 ${W[3]}%</b><div class="sd">穿搭：${W[5]}<br>${H?'住宿：'+H.n+'<br><a class="btn map" target="_blank" rel="noopener" href="'+mp(H.n+' '+H.c)+'">📍 住宿地圖</a>':'住宿：機上'}<br><span class="sub">天氣為示範資料</span></div></div>
+ <div class="tg"><button class="${rain?'':'on'}" data-r="0">☀️ 晴天行程</button><button class="${rain?'on':''}" data-r="1">🌧️ 雨雪替代方案</button></div>
+ ${rain?'<h3>雨雪替代方案</h3>'+alt+'<h3>原定行程（可參考）</h3>':''}${cards}
+ <div class="card"><h3 style="margin-top:0">💰 今日花費</h3>${ex.map((e,i)=>`<div class="exr"><span>${e.t||'未命名'}　${e.a} ${e.c}</span><span>≈ NT$${fm(e.a*rate(e.c))} <button class="btn" style="min-height:32px;padding:0 8px" data-x="${i}">×</button></span></div>`).join('')}
+ <div class="add"><input id="ea" type="number" inputmode="decimal" placeholder="金額"><select id="ec">${CUR.map(c=>`<option>${c}</option>`).join('')}</select></div><div class="add"><input id="et" placeholder="項目（選填）"><button class="btn" id="eb">新增</button></div>
+ <p><b>今日合計：NT$ ${fm(dayTot(n))}</b></p>
+ <h3>匯率（1 外幣＝多少新台幣，示範值請自行修改）</h3><div class="rg">${['USD','EUR','CHF'].map(c=>`<div>${c}<input type="number" inputmode="decimal" data-rt="${c}" value="${S.rate[c]}"></div>`).join('')}</div></div>`;
+ $('#sum').onclick=e=>{if(!e.target.closest('a'))$('#sum').classList.toggle('open')};drawTot()}
+function drawTot(){let t=0;for(let n=1;n<=20;n++)t+=dayTot(n);$('#tot').innerHTML=`<p>20 天總支出：<b>NT$ ${fm(t)}</b></p><p class="sub">6 人平均每人約 NT$ ${fm(t/6)}。金額來自每日花費紀錄。</p>`}
+$('#strip').onclick=e=>{const b=e.target.closest('button');if(b){cur=+b.dataset.n;rain=false;strip();drawDay()}};
+$('#day').onclick=e=>{const t=e.target;if(t.dataset.r){rain=t.dataset.r==='1';drawDay()}else if(t.dataset.x){S.ex[cur].splice(+t.dataset.x,1);save();drawDay()}else if(t.id==='eb'){const a=parseFloat($('#ea').value);if(a>0){(S.ex[cur]=S.ex[cur]||[]).push({a,c:$('#ec').value,t:$('#et').value.trim()});save();drawDay()}}};
+$('#day').onchange=e=>{const t=e.target;if(t.dataset.k!==undefined){S.dn['d'+cur+'_'+t.dataset.k]=t.checked;save();drawDay()}else if(t.dataset.rt){S.rate[t.dataset.rt]=parseFloat(t.value)||0;save();drawDay()}};
+strip();drawDay();
+
+const lb=t=>{if(!t)return'';const p=t.split('｜');return p[0]+' '+(p[2]||p[1]||'')};
+function route(n){const D=DAYS[n-1],am=[],pm=[];let pend='';D.i.forEach(x=>{if(x[0]!=='f'){const o={n:x[2].replace(/（.*/,'').slice(0,8),t:x[1],i:pend};((/^\d/.test(x[1])&&x[1]<'12:00')?am:pm).push(o);pend=''}if(x[6])pend=x[6]});
+ const W=Math.max(am.length,pm.length,1)*128+12,R='#D9482F',G='#2F7D6B',row=(a,y,c,m)=>a.map((o,k)=>{const x=6+k*128;return `<rect x="${x}" y="${y}" width="100" height="46" rx="10" fill="#fff" stroke="${c}" stroke-width="2"/><text x="${x+50}" y="${y+20}" text-anchor="middle" font-size="13" fill="#23406B" font-weight="700">${o.n}</text><text x="${x+50}" y="${y+38}" text-anchor="middle" font-size="12" fill="#51607a">${o.t}</text>`+(k?`<line x1="${x-26}" y1="${y+23}" x2="${x-2}" y2="${y+23}" stroke="${c}" stroke-width="3" marker-end="url(#${m})"/><text x="${x-14}" y="${y-4}" text-anchor="middle" font-size="11" fill="${c}">${lb(o.i).slice(0,9)}</text>`:'')}).join('');
+ const cx=am.length&&pm.length?`<line x1="${6+(am.length-1)*128+50}" y1="66" x2="56" y2="106" stroke="${R}" stroke-width="3" marker-end="url(#ma)"/><text x="${60+(am.length-1)*64}" y="92" font-size="11" fill="${R}">${lb(pm[0].i).slice(0,12)}</text>`:'';
+ return `<div class="rt2"><svg viewBox="0 0 ${W} 164" width="${W}" style="min-width:${W}px;background:#fff"><defs><marker id="ma" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="${R}"/></marker><marker id="mb" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="${G}"/></marker></defs>${row(am,22,R,'ma')}${cx}${row(pm,116,G,'mb')}</svg></div>`}
+function drawMap(){$('#mt').innerHTML='<tr><th>天</th><th>區域</th><th>公里</th><th>時數</th><th>海拔</th><th>提示</th></tr>'+KM.map((k,i)=>`<tr><td>${i+1}</td><td>${k[3]}</td><td>${k[0]||'—'}</td><td>${k[1]||'—'}</td><td>${k[2]||'—'}</td><td>${k[1]>=6||k[2]>=3000?'⚠ ':''}${k[4]}</td></tr>`).join('');
+ $('#md').innerHTML=DAYS.map((D,k)=>{const n=k+1,d=dt(n),H=STAYS.find(x=>x.id===D.s),f=s=>(S.f[H.id+s]||'空白');
+ return `<details><summary>第 ${n} 天 ${d.getMonth()+1}/${d.getDate()}　${KM[k][3]}</summary>${H?`<p class="ln"><b>出發點：</b>${H.n}<br>地址：${f('addr')}｜最近車站：${f('stn')}｜步行：${f('walk')}</p>`:'<p class="ln"><b>出發點：</b>機上或住家</p>'}${route(n)}${D.i.map(x=>x[6]||x[3]?`<p class="ln">${x[1]} ${x[2].replace(/（.*/,'')}${x[3]?'　停留 '+x[3]:''}${x[6]?'<br>↳ '+x[6]:''}</p>`:'').join('')}<p class="ln"><b>合計：</b>約 ${KM[k][0]} 公里・移動約 ${KM[k][1]} 小時・最高海拔約 ${KM[k][2]} 公尺</p></details>`}).join('')}
+function drawStorm(){$('#sd').innerHTML=DAYS.map((D,k)=>{const n=k+1,d=dt(n),H=STAYS.find(x=>x.id===D.s),ks=(DL[n]||[]).map(x=>`<a class="btn map" style="margin:3px 3px 3px 0" target="_blank" rel="noopener" href="${LK[x][1]}">${LK[x][0]}</a>`).join(''),al=(D.a||[]).concat(SUG[n]||[]);
+ const card=a=>{const v=(ALT[a]||'空白|空白|空白|空白|空白').split('|');return `<div class="ac"><b>${a}</b>${D.a&&D.a.includes(a)?' <span class="tag">表格備案</span>':' <span class="tag">自行建議</span>'}<small>地址：${v[0]}｜最近車站：${v[1]}</small><small>特色：${v[2]}｜參觀：${v[3]}｜費用：${v[4]}</small><a class="btn map" style="min-height:36px;line-height:20px;padding:6px 12px;margin-top:4px" target="_blank" rel="noopener" href="${mp(v[0].startsWith('空白')?a+' '+(H?H.c:''):a+' '+v[0])}">📍 地圖</a></div>`};
+ return `<details><summary>第 ${n} 天 ${d.getMonth()+1}/${d.getDate()}　${KM[k][3]}</summary><p class="ln"><b>當日主要行程：</b>${D.i.filter(x=>x[0]==='s').map(x=>x[2].replace(/（.*/,'')).slice(0,3).join('、')||'無'}</p>${ks?`<p class="ln"><b>查運行與即時攝影：</b></p>${ks}`:''}${n>=4&&n<=17?'<p class="ln sub">另請查看上方氣象與雪崩資訊。</p>':''}<p class="ln"><b>備案：</b>${al.length?'':(n===13?'洞穴未開放時，改搭上午火車到策馬特。':'此日無備案，可改去室內餐廳或咖啡館。')}</p>${al.map(card).join('')}</details>`}).join('')}
+go('overview');
+</script>
+</body>
+</html>
